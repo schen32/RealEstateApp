@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontWeight: "700",
+    fontFamily: "Rubik-Bold",
     fontSize: 18,
     lineHeight: 28,
     marginVertical: 40,
