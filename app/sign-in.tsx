@@ -54,13 +54,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scroll: {
-    flexGrow: 1,
     alignItems: "center",
     justifyContent: "flex-start",
   },
   image: {
     width: "100%",
-    height: "67%",
+    height: 600,
   },
   welcomeText: {
     fontSize: 12,
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   icon: {
-    height: "50%",
+    height: "75%",
   },
   loginButtonText: {
     fontSize: 14,
