@@ -1,10 +1,11 @@
 import { Link } from "expo-router";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Index() {
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Welcome to ReState</Text>
       <Link href="/sign-in">Sign In</Link>
       <Link href="/explore">Explore</Link>
       <Link href="/profile">Profile</Link>
@@ -16,7 +17,13 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-evenly",
+    justifyContent: "center",
     alignItems: "center",
+  },
+  title: {
+    fontWeight: "700",
+    fontSize: 18,
+    lineHeight: 28,
+    marginVertical: 40,
   },
 });
