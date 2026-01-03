@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontFamily: "Rubik-Bold",
+    fontFamily: "Rubik-Regular",
     fontSize: 18,
     lineHeight: 28,
     marginVertical: 40,
