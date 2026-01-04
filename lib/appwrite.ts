@@ -21,40 +21,27 @@ export const account = new Account(client);
 export async function login() {
     try {
         const redirectUri = Linking.createURL("/");
-        const response = await account.createOAuth2Token({
+
+        const authUrl = account.createOAuth2Session({
             provider: OAuthProvider.Google,
             success: redirectUri,
-            failure: redirectUri,
+            failure: redirectUri
         });
+        if (!authUrl) throw new Error("Failed to login");
 
-        if (!response) throw new Error("Failed to login");
+        const result = await openAuthSessionAsync(authUrl.toString(), redirectUri);
 
-        const browserResult = await openAuthSessionAsync(
-            response.toString(),
-            redirectUri
-        );
-
-        if (browserResult.type !== "success") throw new Error("Failed to login");
-
-        const url = new URL(browserResult.url);
-        const secret = url.searchParams.get("secret")?.toString();
-        const userId = url.searchParams.get("userId")?.toString();
-
-        if (!secret || !userId) throw new Error("Failed to Login");
-
-        const session = await account.createSession({
-            userId: userId,
-            secret: secret
-        });
-        if (!session) throw new Error("Failed to create a session");
-
+        if (result.type !== "success") {
+            throw new Error("Login cancelled");
+        }
         return true;
 
     } catch (error) {
-        console.error(error);
+        console.error("Login error:", error);
         return false;
     }
 }
+
 
 export async function logout() {
     try {
@@ -68,7 +55,7 @@ export async function logout() {
     }
 }
 
-export async function getUser() {
+export async function getCurrentUser() {
     try {
         const response = await account.get();
 
