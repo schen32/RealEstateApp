@@ -1,8 +1,10 @@
 import icons from "@/constants/icons";
 import images from "@/constants/images";
+import { login } from "@/lib/appwrite";
 import { colors } from "@/theme/colors";
 import React from "react";
 import {
+  Alert,
   Image,
   ScrollView,
   StyleSheet,
@@ -13,7 +15,15 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignIn() {
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    const result = await login();
+
+    if (result) {
+      console.log("login success");
+    } else {
+      Alert.alert("Error", "Failed to login");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safe}>
