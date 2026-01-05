@@ -1,4 +1,4 @@
-import { makeRedirectUri } from 'expo-auth-session';
+import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
 import { Account, Avatars, Client, OAuthProvider } from "react-native-appwrite";
 
@@ -20,12 +20,13 @@ export const account = new Account(client);
 
 export async function login() {
     try {
-        const redirectUri = makeRedirectUri({
-            scheme: 'appwrite-callback-6959a5c7001315a4ead2',
-            preferLocalhost: false,
-          });
+        // const redirectUri = makeRedirectUri({
+        //     scheme: 'appwrite-callback-6959a5c7001315a4ead2',
+        //     preferLocalhost: false,
+        //   });
+        const redirectUri = Linking.createURL("");
 
-        const authUrl = account.createOAuth2Session({
+        const authUrl = account.createOAuth2Token({
             provider: OAuthProvider.Google,
             success: redirectUri,
             failure: redirectUri
@@ -37,6 +38,18 @@ export async function login() {
         if (result.type !== "success") {
             throw new Error("Login cancelled");
         }
+
+        const url = new URL(result.url);
+        const secret = url.searchParams.get("secret")?.toString();
+        const userId = url.searchParams.get("userId")?.toString();
+        if (!secret || !userId) throw new Error("Failed to Login");
+
+        const session = await account.createSession({
+            userId: userId,
+            secret: secret
+        });
+        if (!session) throw new Error("Failed to create session");
+
         return true;
 
     } catch (error) {
@@ -44,7 +57,6 @@ export async function login() {
         return false;
     }
 }
-
 
 export async function logout() {
     try {

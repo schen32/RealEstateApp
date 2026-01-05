@@ -1,6 +1,7 @@
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { login } from "@/lib/appwrite";
+import { useGlobalContext } from "@/lib/global-provider";
 import { colors } from "@/theme/colors";
 import React from "react";
 import {
@@ -15,14 +16,17 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SignIn() {
-  const handleLogin = async () => {
-    const result = await login();
+  const { refetch, loading, isLoggedIn } = useGlobalContext();
 
-    if (result) {
-      console.log("login success");
-    } else {
-      Alert.alert("Error", "Failed to login");
+  const handleLogin = async () => {
+    const success = await login();
+
+    if (!success) {
+      Alert.alert("Login failed");
+      return;
     }
+
+    await refetch();
   };
 
   return (
