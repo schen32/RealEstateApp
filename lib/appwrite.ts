@@ -1,4 +1,4 @@
-import * as Linking from "expo-linking";
+import { makeRedirectUri } from 'expo-auth-session';
 import { openAuthSessionAsync } from "expo-web-browser";
 import { Account, Avatars, Client, OAuthProvider } from "react-native-appwrite";
 
@@ -20,7 +20,10 @@ export const account = new Account(client);
 
 export async function login() {
     try {
-        const redirectUri = Linking.createURL("/");
+        const redirectUri = makeRedirectUri({
+            scheme: 'appwrite-callback-6959a5c7001315a4ead2',
+            preferLocalhost: false,
+          });
 
         const authUrl = account.createOAuth2Session({
             provider: OAuthProvider.Google,
