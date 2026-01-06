@@ -1,9 +1,11 @@
 import { settings } from "@/constants/data";
 import icons from "@/constants/icons";
-import images from "@/constants/images";
+import { logout } from "@/lib/appwrite";
+import { useGlobalContext } from "@/lib/global-provider";
 import { colors } from "@/theme/colors";
 import React from "react";
 import {
+  Alert,
   Image,
   ImageSourcePropType,
   ScrollView,
@@ -42,7 +44,17 @@ const SettingItem = ({
 );
 
 export default function Profile() {
-  const handleLogout = async () => {};
+  const { user, refetch } = useGlobalContext();
+
+  const handleLogout = async () => {
+    const result = await logout();
+    if (result) {
+      Alert.alert("Success", "You have logged out");
+      refetch();
+    } else {
+      Alert.alert("Error", "Failed to logout");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -57,11 +69,14 @@ export default function Profile() {
 
         <View style={styles.avatarContainer}>
           <View style={styles.avatarContainer2}>
-            <Image style={styles.avatarImage} source={images.avatar}></Image>
+            <Image
+              style={styles.avatarImage}
+              source={{ uri: user?.avatar }}
+            ></Image>
             <TouchableOpacity style={styles.editIconButton}>
               <Image style={styles.editIcon} source={icons.edit}></Image>
             </TouchableOpacity>
-            <Text style={styles.nameText}>Adrian</Text>
+            <Text style={styles.nameText}>{user?.name}</Text>
           </View>
         </View>
 
@@ -82,6 +97,7 @@ export default function Profile() {
             title="Logout"
             textStyle={{ color: colors.danger[100] }}
             showArrow={false}
+            onPress={handleLogout}
           ></SettingItem>
         </View>
       </ScrollView>
