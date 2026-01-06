@@ -5,48 +5,70 @@ import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { colors } from "@/theme/colors";
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.leftRightView}>
-        <View style={styles.greetingView2}>
-          <Image style={styles.avatarImage} source={images.avatar}></Image>
-          <View style={styles.greetingTextView}>
-            <Text style={styles.greetingText1}>Good Morning</Text>
-            <Text style={styles.greetingText2}>Adrian</Text>
-          </View>
-        </View>
-        <Image style={styles.icon} source={icons.bell}></Image>
-      </View>
-      <Search></Search>
+      <FlatList
+        data={[1, 2, 3]}
+        renderItem={({ item }) => <Card></Card>}
+        keyExtractor={(item) => item.toString()}
+        numColumns={2}
+        showsVerticalScrollIndicator={false}
+        columnWrapperStyle={styles.featuredCards}
+        ListHeaderComponent={
+          <>
+            <View style={styles.leftRightView}>
+              <View style={styles.greetingView2}>
+                <Image
+                  style={styles.avatarImage}
+                  source={images.avatar}
+                ></Image>
+                <View style={styles.greetingTextView}>
+                  <Text style={styles.greetingText1}>Good Morning</Text>
+                  <Text style={styles.greetingText2}>Adrian</Text>
+                </View>
+              </View>
+              <Image style={styles.icon} source={icons.bell}></Image>
+            </View>
+            <Search></Search>
 
-      <View style={styles.leftRightView}>
-        <Text style={styles.boldText}>Featured</Text>
-        <TouchableOpacity>
-          <Text style={styles.primaryText}>See All</Text>
-        </TouchableOpacity>
-      </View>
+            <View style={styles.leftRightView}>
+              <Text style={styles.boldText}>Featured</Text>
+              <TouchableOpacity>
+                <Text style={styles.primaryText}>See All</Text>
+              </TouchableOpacity>
+            </View>
 
-      <View style={styles.featuredCards}>
-        <FeaturedCard></FeaturedCard>
-        <FeaturedCard></FeaturedCard>
-      </View>
+            <FlatList
+              data={[1, 2, 3]}
+              renderItem={({ item }) => <FeaturedCard></FeaturedCard>}
+              keyExtractor={(item) => item.toString()}
+              horizontal
+              bounces={false}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.featuredCards}
+            ></FlatList>
 
-      <View style={styles.leftRightView}>
-        <Text style={styles.boldText}>Our Recommendation</Text>
-        <TouchableOpacity>
-          <Text style={styles.primaryText}>See All</Text>
-        </TouchableOpacity>
-      </View>
-      <Filters></Filters>
-
-      <View style={styles.featuredCards}>
-        <Card></Card>
-        <Card></Card>
-      </View>
+            <View style={styles.leftRightView}>
+              <Text style={styles.boldText}>Our Recommendation</Text>
+              <TouchableOpacity>
+                <Text style={styles.primaryText}>See All</Text>
+              </TouchableOpacity>
+            </View>
+            <Filters></Filters>
+          </>
+        }
+      ></FlatList>
     </SafeAreaView>
   );
 }
