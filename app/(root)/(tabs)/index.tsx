@@ -1,4 +1,5 @@
 import { Card, FeaturedCard } from "@/components/cards";
+import Filters from "@/components/filters";
 import Search from "@/components/search";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
@@ -40,6 +41,7 @@ export default function Index() {
           <Text style={styles.primaryText}>See All</Text>
         </TouchableOpacity>
       </View>
+      <Filters></Filters>
 
       <View style={styles.featuredCards}>
         <Card></Card>
@@ -55,8 +57,7 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   safe: {
-    flex: 1,
-    backgroundColor: colors.primary[100],
+    backgroundColor: "white",
     paddingHorizontal: 20,
     paddingVertical: 10,
     gap: 10,
