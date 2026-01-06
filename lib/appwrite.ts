@@ -20,10 +20,6 @@ export const account = new Account(client);
 
 export async function login() {
     try {
-        // const redirectUri = makeRedirectUri({
-        //     scheme: 'appwrite-callback-6959a5c7001315a4ead2',
-        //     preferLocalhost: false,
-        //   });
         const redirectUri = Linking.createURL("");
 
         const authUrl = account.createOAuth2Token({
