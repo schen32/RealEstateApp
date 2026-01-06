@@ -19,12 +19,14 @@ export default function Index() {
   return (
     <SafeAreaView style={styles.safe}>
       <FlatList
-        data={[1, 2, 3]}
+        data={[1, 2, 3, 4]}
         renderItem={({ item }) => <Card></Card>}
         keyExtractor={(item) => item.toString()}
         numColumns={2}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.verticalFlatList}
         columnWrapperStyle={styles.featuredCards}
+        ListHeaderComponentStyle={styles.verticalFlatList}
         ListHeaderComponent={
           <>
             <View style={styles.leftRightView}>
@@ -74,6 +76,9 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
+  verticalFlatList: {
+    gap: 10,
+  },
   featuredCards: {
     flexDirection: "row",
     gap: 15,
@@ -82,7 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     paddingHorizontal: 20,
     paddingVertical: 10,
-    gap: 10,
   },
   leftRightView: {
     flexDirection: "row",
