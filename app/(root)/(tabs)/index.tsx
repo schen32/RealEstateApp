@@ -1,3 +1,4 @@
+import { Card, FeaturedCard } from "@/components/cards";
 import Search from "@/components/search";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
@@ -9,7 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   return (
     <SafeAreaView style={styles.safe}>
-      <View style={styles.greetingView}>
+      <View style={styles.leftRightView}>
         <View style={styles.greetingView2}>
           <Image style={styles.avatarImage} source={images.avatar}></Image>
           <View style={styles.greetingTextView}>
@@ -21,12 +22,15 @@ export default function Index() {
       </View>
       <Search></Search>
 
-      <View style={styles.greetingView}>
+      <View style={styles.leftRightView}>
         <Text style={styles.boldText}>Featured</Text>
         <TouchableOpacity>
           <Text style={styles.primaryText}>See All</Text>
         </TouchableOpacity>
       </View>
+
+      <FeaturedCard></FeaturedCard>
+      <Card></Card>
     </SafeAreaView>
   );
 }
@@ -36,12 +40,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
     paddingHorizontal: 20,
+    paddingVertical: 10,
+    gap: 10,
   },
-  greetingView: {
+  leftRightView: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 10,
   },
   greetingView2: {
     flexDirection: "row",
