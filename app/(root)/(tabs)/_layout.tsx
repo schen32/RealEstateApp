@@ -31,7 +31,7 @@ const TabIcon = ({
   </View>
 );
 
-const TabsLayout = () => {
+export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
@@ -87,9 +87,7 @@ const TabsLayout = () => {
       ></Tabs.Screen>
     </Tabs>
   );
-};
-
-export default TabsLayout;
+}
 
 const styles = StyleSheet.create({
   iconView: {
