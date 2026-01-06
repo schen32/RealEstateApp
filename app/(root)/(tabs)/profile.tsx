@@ -1,15 +1,44 @@
 import icons from "@/constants/icons";
 import images from "@/constants/images";
+import { colors } from "@/theme/colors";
 import React from "react";
 import {
   Image,
+  ImageSourcePropType,
   ScrollView,
+  StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+interface SettingItemProps {
+  icon: ImageSourcePropType;
+  title: string;
+  onPress?: () => void;
+  textStyle?: StyleProp<TextStyle>;
+  showArrow?: boolean;
+}
+
+const SettingItem = ({
+  icon,
+  title,
+  onPress,
+  textStyle,
+  showArrow = true,
+}: SettingItemProps) => (
+  <TouchableOpacity onPress={onPress} style={styles.settingItemContainer}>
+    <View style={styles.settingItemContainer2}>
+      <Image style={styles.settingItemImage} source={icon}></Image>
+      <Text style={[styles.settingItemText, textStyle]}>{title}</Text>
+    </View>
+
+    {showArrow && <Image source={icons.rightArrow} style={styles.icon}></Image>}
+  </TouchableOpacity>
+);
 
 export default function Profile() {
   const handleLogout = async () => {};
@@ -22,7 +51,7 @@ export default function Profile() {
       >
         <View style={styles.titleContainer}>
           <Text style={styles.titleText}>Profile</Text>
-          <Image style={styles.profileIcon} source={icons.bell}></Image>
+          <Image style={styles.icon} source={icons.bell}></Image>
         </View>
 
         <View style={styles.avatarContainer}>
@@ -33,6 +62,11 @@ export default function Profile() {
             </TouchableOpacity>
             <Text style={styles.nameText}>Adrian</Text>
           </View>
+        </View>
+
+        <View style={styles.settingsContainer}>
+          <SettingItem icon={icons.calendar} title="My Bookings"></SettingItem>
+          <SettingItem icon={icons.wallet} title="Payments"></SettingItem>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -57,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: "Rubik-Bold",
   },
-  profileIcon: {
+  icon: {
     width: 20,
     height: 20,
   },
@@ -92,5 +126,30 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 18,
     fontFamily: "Rubik-Bold",
+  },
+  settingsContainer: {
+    flexDirection: "column",
+    marginTop: 20,
+  },
+  settingItemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 10,
+  },
+  settingItemContainer2: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: 10,
+  },
+  settingItemImage: {
+    width: 40,
+    height: 40,
+  },
+  settingItemText: {
+    fontSize: 14,
+    fontFamily: "Rubik-Medium",
+    color: colors.black[300],
   },
 });
