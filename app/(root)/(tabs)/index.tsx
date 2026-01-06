@@ -29,16 +29,34 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
-      <FeaturedCard></FeaturedCard>
-      <Card></Card>
+      <View style={styles.featuredCards}>
+        <FeaturedCard></FeaturedCard>
+        <FeaturedCard></FeaturedCard>
+      </View>
+
+      <View style={styles.leftRightView}>
+        <Text style={styles.boldText}>Our Recommendation</Text>
+        <TouchableOpacity>
+          <Text style={styles.primaryText}>See All</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.featuredCards}>
+        <Card></Card>
+        <Card></Card>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  featuredCards: {
+    flexDirection: "row",
+    gap: 15,
+  },
   safe: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: colors.primary[100],
     paddingHorizontal: 20,
     paddingVertical: 10,
     gap: 10,
