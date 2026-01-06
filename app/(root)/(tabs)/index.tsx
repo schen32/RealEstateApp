@@ -1,8 +1,9 @@
+import Search from "@/components/search";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { colors } from "@/theme/colors";
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -17,6 +18,14 @@ export default function Index() {
           </View>
         </View>
         <Image style={styles.icon} source={icons.bell}></Image>
+      </View>
+      <Search></Search>
+
+      <View style={styles.greetingView}>
+        <Text style={styles.boldText}>Featured</Text>
+        <TouchableOpacity>
+          <Text style={styles.primaryText}>See All</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -51,17 +60,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   greetingText1: {
-    fontSize: 10,
+    fontSize: 12,
     fontFamily: "Rubik-Regular",
     color: colors.black[100],
   },
   greetingText2: {
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: "Rubik-Medium",
     color: colors.black[300],
   },
   icon: {
     width: 20,
     height: 20,
+  },
+  boldText: {
+    fontSize: 16,
+    fontFamily: "Rubik-Bold",
+    color: colors.black[300],
+  },
+  primaryText: {
+    fontSize: 14,
+    fontFamily: "Rubik-Bold",
+    color: colors.primary[300],
   },
 });
