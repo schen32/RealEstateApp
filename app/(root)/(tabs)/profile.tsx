@@ -1,3 +1,4 @@
+import { settings } from "@/constants/data";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { colors } from "@/theme/colors";
@@ -68,6 +69,21 @@ export default function Profile() {
           <SettingItem icon={icons.calendar} title="My Bookings"></SettingItem>
           <SettingItem icon={icons.wallet} title="Payments"></SettingItem>
         </View>
+
+        <View style={styles.settingsContainer2}>
+          {settings.slice(2).map((item, index) => (
+            <SettingItem key={index} {...item}></SettingItem>
+          ))}
+        </View>
+
+        <View style={styles.settingsContainer2}>
+          <SettingItem
+            icon={icons.logout}
+            title="Logout"
+            textStyle={{ color: colors.danger[100] }}
+            showArrow={false}
+          ></SettingItem>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -129,7 +145,7 @@ const styles = StyleSheet.create({
   },
   settingsContainer: {
     flexDirection: "column",
-    marginTop: 20,
+    marginTop: 10,
   },
   settingItemContainer: {
     flexDirection: "row",
@@ -144,12 +160,19 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   settingItemImage: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
   },
   settingItemText: {
     fontSize: 14,
     fontFamily: "Rubik-Medium",
     color: colors.black[300],
+  },
+  settingsContainer2: {
+    flexDirection: "column",
+    marginTop: 10,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: colors.primary[200],
   },
 });
