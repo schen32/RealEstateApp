@@ -2,9 +2,12 @@ import { Card, FeaturedCard } from "@/components/cards";
 import Filters from "@/components/filters";
 import Search from "@/components/search";
 import icons from "@/constants/icons";
+import { getLatestProperties, getProperties } from "@/lib/appwrite";
 import { useGlobalContext } from "@/lib/global-provider";
+import { useAppwrite } from "@/lib/useAppwrite";
 import { colors } from "@/theme/colors";
-import React from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import React, { useEffect } from "react";
 import {
   FlatList,
   Image,
@@ -17,13 +20,43 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const { user } = useGlobalContext();
+  const params = useLocalSearchParams<{ query?: string; filter?: string }>();
+
+  const { data: latestProperties, loading: latestPropertiesLoading } =
+    useAppwrite({
+      fn: getLatestProperties,
+    });
+
+  const {
+    data: properties,
+    loading,
+    refetch,
+  } = useAppwrite({
+    fn: getProperties,
+    params: {
+      filter: params.filter!,
+      query: params.query!,
+      limit: 6,
+    },
+    skip: true,
+  });
+
+  const handleCardPress = (id: string) => router.push(`/properties/${id}`);
+
+  useEffect(() => {
+    refetch({
+      filter: params.filter!,
+      query: params.query!,
+      limit: 6,
+    });
+  }, [params.filter, params.query]);
 
   return (
     <SafeAreaView style={styles.safe}>
       <FlatList
-        data={[1, 2, 3, 4]}
+        data={properties}
         renderItem={({ item }) => <Card></Card>}
-        keyExtractor={(item) => item.toString()}
+        keyExtractor={(item) => item.$id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.verticalFlatList}
@@ -54,9 +87,9 @@ export default function Index() {
             </View>
 
             <FlatList
-              data={[1, 2, 3]}
+              data={latestProperties}
               renderItem={({ item }) => <FeaturedCard></FeaturedCard>}
-              keyExtractor={(item) => item.toString()}
+              keyExtractor={(item) => item.$id}
               horizontal
               bounces={false}
               showsHorizontalScrollIndicator={false}

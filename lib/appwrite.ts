@@ -98,7 +98,7 @@ export async function getLatestProperties() {
         const result = await table.listRows({
             databaseId: config.databaseId!,
             tableId: config.propertiesTableId!,
-            queries: [Query.orderAsc("$CreatedAt"), Query.limit(5)]
+            queries: [Query.orderAsc("$createdAt"), Query.limit(5)]
         });
 
         return result.rows;
