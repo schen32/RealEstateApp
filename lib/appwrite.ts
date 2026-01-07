@@ -7,10 +7,10 @@ export const config = {
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT,
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
     databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID,
-    agentsTableId: process.env.EXPO_PUBLIC_AGENTS_TABLE_ID,
-    propertiesTableId: process.env.EXPO_PUBLIC_PROPERTIES_TABLE_ID,
-    reviewsTableId: process.env.EXPO_PUBLIC_REVIEWS_TABLE_ID,
-    galleriesTableId: process.env.EXPO_PUBLIC_GALLERIES_TABLE_ID,
+    agentsTableId: process.env.EXPO_PUBLIC_APPWRITE_AGENTS_TABLE_ID,
+    propertiesTableId: process.env.EXPO_PUBLIC_APPWRITE_PROPERTIES_TABLE_ID,
+    reviewsTableId: process.env.EXPO_PUBLIC_APPWRITE_REVIEWS_TABLE_ID,
+    galleriesTableId: process.env.EXPO_PUBLIC_APPWRITE_GALLERIES_TABLE_ID,
 }
 
 export const client = new Client();
