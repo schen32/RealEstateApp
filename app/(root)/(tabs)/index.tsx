@@ -55,7 +55,9 @@ export default function Index() {
     <SafeAreaView style={styles.safe}>
       <FlatList
         data={properties}
-        renderItem={({ item }) => <Card></Card>}
+        renderItem={({ item }) => (
+          <Card item={item} onPress={() => handleCardPress(item.$id)}></Card>
+        )}
         keyExtractor={(item) => item.$id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
@@ -88,7 +90,12 @@ export default function Index() {
 
             <FlatList
               data={latestProperties}
-              renderItem={({ item }) => <FeaturedCard></FeaturedCard>}
+              renderItem={({ item }) => (
+                <FeaturedCard
+                  item={item}
+                  onPress={() => handleCardPress(item.$id)}
+                ></FeaturedCard>
+              )}
               keyExtractor={(item) => item.$id}
               horizontal
               bounces={false}
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   safe: {
-    backgroundColor: "white",
+    backgroundColor: "hsl(0, 0%, 100%)",
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
