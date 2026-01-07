@@ -3,11 +3,9 @@ import Filters from "@/components/filters";
 import Search from "@/components/search";
 import icons from "@/constants/icons";
 import { useGlobalContext } from "@/lib/global-provider";
-import seed from "@/lib/seed";
 import { colors } from "@/theme/colors";
 import React from "react";
 import {
-  Button,
   FlatList,
   Image,
   StyleSheet,
@@ -22,7 +20,6 @@ export default function Index() {
 
   return (
     <SafeAreaView style={styles.safe}>
-      <Button title="seed" onPress={seed}></Button>
       <FlatList
         data={[1, 2, 3, 4]}
         renderItem={({ item }) => <Card></Card>}
