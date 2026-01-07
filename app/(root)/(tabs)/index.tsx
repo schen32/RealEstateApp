@@ -2,7 +2,7 @@ import { Card, FeaturedCard } from "@/components/cards";
 import Filters from "@/components/filters";
 import Search from "@/components/search";
 import icons from "@/constants/icons";
-import images from "@/constants/images";
+import { useGlobalContext } from "@/lib/global-provider";
 import { colors } from "@/theme/colors";
 import React from "react";
 import {
@@ -16,6 +16,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const { user } = useGlobalContext();
+
   return (
     <SafeAreaView style={styles.safe}>
       <FlatList
@@ -33,11 +35,11 @@ export default function Index() {
               <View style={styles.greetingView2}>
                 <Image
                   style={styles.avatarImage}
-                  source={images.avatar}
+                  source={{ uri: user?.avatar }}
                 ></Image>
                 <View style={styles.greetingTextView}>
                   <Text style={styles.greetingText1}>Good Morning</Text>
-                  <Text style={styles.greetingText2}>Adrian</Text>
+                  <Text style={styles.greetingText2}>{user?.name}</Text>
                 </View>
               </View>
               <Image style={styles.icon} source={icons.bell}></Image>
